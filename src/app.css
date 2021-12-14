@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --app-max-width: 100rem;
+}
+
+main {
+    width: var(--app-max-width) !important;
+    max-width: var(--app-max-width) !important;
+}
