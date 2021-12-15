@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$app-max-width: 100rem;
+:root {
+    --app-max-width: 100rem;
+    --footer-height: 4rem;
+}
+
+html, body {
+  @extend .fancy-scrollbar;
+}
+
+main {
+    width: 100% !important;
+    max-width: var(--app-max-width) !important;
+}
+
+@import "scroll";
+@import "theme";

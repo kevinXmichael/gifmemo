@@ -12,7 +12,7 @@
 </script>
 
 {#await setupResult then result}
-	<main style="margin: auto;">
+	<main class="m-auto" style="padding-bottom: var(--footer-height);">
 		<slot />
 	</main>
 {/await}

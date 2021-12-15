@@ -25,8 +25,8 @@ const config = {
 			xl: '4.0rem',
 		},
 		colors: {
-			'primary': '#000000',
-			'secondary': '#ffffff'
+			'primary': 'var(--primary)',
+			'secondary': 'var(--secondary)'
 		},
 		fontFamily: {
 			'roboto': ['Roboto', 'sans-serif']
