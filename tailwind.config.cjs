@@ -26,7 +26,9 @@ const config = {
 		},
 		colors: {
 			'primary': 'var(--primary)',
-			'secondary': 'var(--secondary)'
+			'secondary': 'var(--secondary)',
+			'success': 'var(--success)',
+			'yellow': 'var(--yellow)'
 		},
 		fontFamily: {
 			'roboto': ['Roboto', 'sans-serif']

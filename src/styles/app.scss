@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-$app-max-width: 100rem;
+@import "variables";
+
 :root {
     --app-max-width: 100rem;
     --footer-height: 4rem;
@@ -17,5 +18,7 @@ main {
     max-width: var(--app-max-width) !important;
 }
 
+@import "animations";
+@import "font";
 @import "scroll";
 @import "theme";

@@ -19,5 +19,13 @@
 				{/each}
 			</div>
 		{/await}
+		<!-- <iframe
+			src="https://discord.com/widget?id=654982548015022092&theme=dark"
+			width="350"
+			height="500"
+			allowtransparency="true"
+			frameborder="0"
+			sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+		/> -->
 	</Layout>
 {/await}

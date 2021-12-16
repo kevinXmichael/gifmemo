@@ -52,8 +52,8 @@ function doHTMLvoodoo () {
 
   // https://patorjk.com/software/taag/#p=display&f=Small&t=gifmemo
   const gifmemo_ = String.raw`
-    _  __                     
-__ _(_)/ _|_ __  ___ _ __  ___ 
+      _  __                     
+ __ _(_)/ _|_ __  ___ _ __  ___ 
 / _' | |  _| '  \/ -_) '  \/ _ \
 \__, |_|_| |_|_|_\___|_|_|_\___/
 |___/                                                         
