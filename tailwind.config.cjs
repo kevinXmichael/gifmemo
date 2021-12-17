@@ -29,9 +29,6 @@ const config = {
 			'secondary': 'var(--secondary)',
 			'success': 'var(--success)',
 			'yellow': 'var(--yellow)'
-		},
-		fontFamily: {
-			'roboto': ['Roboto', 'sans-serif']
 		}
 	},
 };

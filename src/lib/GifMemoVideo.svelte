@@ -1,11 +1,11 @@
 <script>
 	export let gif = { url: '', discovered: false }
+	export let index = 0
 
 	let borderColor = 'border-secondary'
 	let clicked = false
 	const videoWrapperSize = 250
-	const videoStyle = `width: ${videoWrapperSize}px; max-width: ${videoWrapperSize}px;
-						height: ${videoWrapperSize}px; max-height: ${videoWrapperSize}px;`
+	const videoStyle = `width: ${videoWrapperSize}px; max-width: ${videoWrapperSize}px; height: ${videoWrapperSize}px; max-height: ${videoWrapperSize}px;`
 	$: videoClass = `border-2 rounded-md pressable std-hover--scale ${borderColor}`
 
 	$: {
@@ -31,8 +31,15 @@
 		{#if gif.discovered || clicked}
 			<video src={gif.url} autoplay muted loop style={videoStyle} class={videoClass} />
 		{:else}
-			<div style={videoStyle} class={videoClass} on:click={handleClick}>
-				<h2 class="text-secondary">click mich</h2>
+			<div style="position: relative;">
+				<img
+					alt="card-back"
+					src="card-back.svg"
+					style={videoStyle}
+					class={videoClass}
+					on:click={handleClick}
+				/>
+				<h2 style="position: absolute; left: 1rem; top: 1rem;">{index}</h2>
 			</div>
 		{/if}
 	</div>

@@ -4,7 +4,7 @@
 	import boot from '@/lib/boot'
 	import Layout from '@/lib/Layout.svelte'
 	import GifMemoVideo from '@/lib/GifMemoVideo.svelte'
-	import '../styles/app.scss'
+	import '@/styles/app.scss'
 
 	const bootfile = boot()
 	const gifs = fetchGifs(32)
@@ -15,7 +15,7 @@
 		{#await gifs then resultGifs}
 			<div class="flex flex-row flex-wrap items-center justify-center">
 				{#each resultGifs as gif, index}
-					<GifMemoVideo {gif} />
+					<GifMemoVideo {gif} index={index + 1} />
 				{/each}
 			</div>
 		{/await}
