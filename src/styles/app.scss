@@ -2,23 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "variables";
+@import 'variables';
 
 :root {
-    --app-max-width: 100rem;
-    --footer-height: 4rem;
+	--app-max-width: 100rem;
+	--footer-height: 4rem;
 }
 
-html, body {
-  @extend .fancy-scrollbar;
+html,
+body {
+	@extend .fancy-scrollbar;
 }
 
 main {
-    width: 100% !important;
-    max-width: var(--app-max-width) !important;
+	width: 100% !important;
+	max-width: var(--app-max-width) !important;
 }
 
-@import "animations";
-@import "font";
-@import "scroll";
-@import "theme";
+@import 'animations';
+@import 'font';
+@import 'scroll';
+@import 'theme';

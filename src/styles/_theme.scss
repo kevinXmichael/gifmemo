@@ -1,16 +1,16 @@
 .theme {
-    --success: #1cb51c;
-    --yellow: #FFFF00;
+	--success: #1cb51c;
+	--yellow: #ffff00;
 
-    &--dark {
-        @extend .theme;
-        --primary: #000000;
-        --secondary: #ffffff;
-    }
+	&--dark {
+		@extend .theme;
+		--primary: #000000;
+		--secondary: #ffffff;
+	}
 
-    &--light {
-        @extend .theme;
-        --primary: #ffffff;
-        --secondary: #000000;
-    }
+	&--light {
+		@extend .theme;
+		--primary: #ffffff;
+		--secondary: #000000;
+	}
 }

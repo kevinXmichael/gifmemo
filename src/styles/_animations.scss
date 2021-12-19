@@ -1,36 +1,36 @@
 .std-hover {
-  @media (hover) {
-    &:hover {
-      outline: 0;
-      transition: $std-transition-duration;
-      cursor: pointer;
-    }
-  }
-  
-  &--scale {
-    transition: $std-transition-duration;
+	@media (hover) {
+		&:hover {
+			outline: 0;
+			transition: $std-transition-duration;
+			cursor: pointer;
+		}
+	}
 
-    &:hover {
-      transition: $std-transition-duration;
-      transform: scale($std-scale-factor);
-    }
-  }
+	&--scale {
+		transition: $std-transition-duration;
+
+		&:hover {
+			transition: $std-transition-duration;
+			transform: scale($std-scale-factor);
+		}
+	}
 }
 
 .pressable {
-  transition: $std-transition-duration;
-  
-  &:active {
-    transform: scale($std-shrink-factor) !important;
-  }
+	transition: $std-transition-duration;
+
+	&:active {
+		transform: scale($std-shrink-factor) !important;
+	}
 }
 
 .flip-horizontally {
-  transform: rotateY(180deg);
-  transition: $std-transition-duration;
+	transform: rotateY(180deg);
+	transition: $std-transition-duration;
 
-  &--back {
-    // transform: rotateY(360deg);
-    transition: $std-transition-duration;
-  }
+	&--back {
+		// transform: rotateY(360deg);
+		transition: $std-transition-duration;
+	}
 }

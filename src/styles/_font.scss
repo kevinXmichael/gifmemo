@@ -1,27 +1,29 @@
 @mixin std-font-props {
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
-  margin-block-start: 0;
-  margin-block-end: 0;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
 
-  line-height: 1.15rem;
+	line-height: 1.15rem;
 }
 
 $fw-regular: 400;
 $fw-bold: 700;
 
-*, html, body {
-  @include std-font-props;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  font-weight: $fw-regular;
+*,
+html,
+body {
+	@include std-font-props;
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	font-weight: $fw-regular;
 }
 
 .text-no-select {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }

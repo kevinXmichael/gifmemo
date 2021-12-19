@@ -1,4 +1,7 @@
 <script>
+	import { onDestroy } from 'svelte'
+	import { foundGifs, matchedGifs, MAX_CLICKS_ON_GIFS } from '@/lib/store'
+
 	export let gif = { url: '', discovered: false }
 	export let index = 0
 
@@ -6,21 +9,47 @@
 	let clicked = false
 	const videoWrapperSize = 250
 	const videoStyle = `width: ${videoWrapperSize}px; max-width: ${videoWrapperSize}px; height: ${videoWrapperSize}px; max-height: ${videoWrapperSize}px;`
-	$: videoClass = `border-2 rounded-md pressable std-hover--scale ${borderColor}`
 
+	$: videoClass = `border-2 rounded-md pressable std-hover--scale ${borderColor}`
 	$: {
-		if (clicked) {
-			borderColor = 'border-yellow'
-		} else if (gif.discovered) {
+		checkStyle()
+	}
+
+	function checkStyle() {
+		if (gif.discovered) {
 			borderColor = 'border-success'
+		} else if (clicked) {
+			borderColor = 'border-yellow'
 		} else {
 			borderColor = 'border-secondary'
 		}
 	}
 
 	function handleClick() {
-		clicked = true
+		if ($foundGifs.length < MAX_CLICKS_ON_GIFS) {
+			clicked = true
+			foundGifs.update((val) => [...val, gif.url])
+		}
 	}
+
+	const unsubscribeFoundGifs = foundGifs.subscribe((gifs) => {
+		if (gifs.isEmpty()) {
+			clicked = false
+		}
+		checkStyle()
+	})
+
+	const unsubscribeMatchedGifs = matchedGifs.subscribe((gifs) => {
+		if (gifs.includes(gif.url)) {
+			gif.discovered = true
+			checkStyle()
+		}
+	})
+
+	onDestroy(() => {
+		unsubscribeFoundGifs()
+		unsubscribeMatchedGifs()
+	})
 </script>
 
 <div class="p-sm">

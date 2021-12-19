@@ -8,3 +8,4 @@ node_modules
 *.lock
 *-lock.json
 config.json
+dist

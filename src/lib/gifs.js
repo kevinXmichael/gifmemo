@@ -1,17 +1,29 @@
 import { TENOR_API_KEY } from '@/config.json'
 import axios from 'axios'
 
-export async function fetchGifs(limit = 25) {
-    const locale = 'de'
-    const contentfilter = 'medium'
-    const media_filter = 'minimal'
-    const gifsFetchingUrl = `https://g.tenor.com/v1/trending?locale=${locale}&contentfilter=${contentfilter}&media_filter=${media_filter}&limit=${limit}&key=${TENOR_API_KEY}`
+const GIFS_ONE_PLAYER = 5
+const DEFAULT_PLAYERS_COUNT = 2
 
-    const result = await axios.get(gifsFetchingUrl)
-    return result?.data?.results?.map(gif => {
-        return {
-            url: gif.media[0]?.mp4?.url,
-            discovered: false
-        }
-    }) ?? []
+function gifsCountToFetch(players = DEFAULT_PLAYERS_COUNT) {
+	return GIFS_ONE_PLAYER * players
+}
+
+export async function fetchGifs(players = DEFAULT_PLAYERS_COUNT) {
+	const locale = 'de'
+	const contentfilter = 'medium'
+	const media_filter = 'minimal'
+	const gifsFetchingUrl = `https://g.tenor.com/v1/trending?locale=${locale}&contentfilter=${contentfilter}&media_filter=${media_filter}&limit=${gifsCountToFetch(
+		players
+	)}&key=${TENOR_API_KEY}`
+
+	const result = await axios.get(gifsFetchingUrl)
+	const resultGifs =
+		result?.data?.results?.map((gif) => {
+			return {
+				url: gif.media[0]?.mp4?.url,
+				discovered: false
+			}
+		}) ?? []
+
+	return [...resultGifs, ...resultGifs].shuffle()
 }

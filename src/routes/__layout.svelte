@@ -1,6 +1,10 @@
 <script>
+	import '@/styles/app.scss'
+	import boot from '@/lib/boot'
+
 	import { register, init, _ } from 'svelte-i18n' // https://github.com/kaisermann/svelte-i18n
 	import Footer from '@/lib/Footer.svelte'
+	import Header from '@/lib/Header.svelte'
 
 	async function setup() {
 		register('en', () => import('@/i18n/en.json'))
@@ -9,12 +13,17 @@
 	}
 
 	const setupResult = setup()
+	const bootfile = boot()
 </script>
 
-{#await setupResult then result}
-	<main class="m-auto" style="padding-bottom: var(--footer-height);">
-		<slot />
-	</main>
-{/await}
+{#await bootfile then resultBoot}
+	<Header />
 
-<Footer />
+	{#await setupResult then result}
+		<main class="m-auto" style="padding-bottom: var(--footer-height);">
+			<slot />
+		</main>
+	{/await}
+
+	<Footer />
+{/await}
