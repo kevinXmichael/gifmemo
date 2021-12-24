@@ -1,6 +1,7 @@
 <script>
 	import { NETWORK_STATUS } from '@/lib/network'
-	import { onDestroy } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
+	import { page } from '$app/stores'
 	import { io } from 'socket.io-client'
 	const socket = io('ws://localhost:3030', { autoConnect: false })
 	let connected = false
@@ -33,13 +34,17 @@
 		}
 	}
 
+	onMount(() => {
+		hostID = $page.query?.get?.('hostID') ?? hostID
+	})
+
 	onDestroy(() => {
 		socket.disconnect()
 	})
 	socket.connect()
 </script>
 
-<h1>Welcome</h1>
+<h1 class="text-secondary">Welcome</h1>
 
 {#if connected}
 	{#if networkStatus !== NETWORK_STATUS.LOADED}

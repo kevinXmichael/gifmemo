@@ -32,7 +32,8 @@
 	<button class="bg-primary text-secondary" on:click={createNewGameSession}>create game</button>
 	{#if hostID}
 		<br />
-		<p class="text-secondary">Share this id pls: <b>{hostID}</b></p>
+		<p class="text-secondary">Share this id: <b>{hostID}</b></p>
+		<p class="text-secondary">Or this link: <b>https://gifmemo.de/game/join&id={hostID}</b></p>
 	{/if}
 {:else}
 	<h2 class="text-secondary">You are not connected yet, please wait...</h2>
