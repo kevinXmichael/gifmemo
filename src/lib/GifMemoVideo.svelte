@@ -1,6 +1,6 @@
 <script>
 	import { onDestroy } from 'svelte'
-	import { foundGifs, matchedGifs, MAX_CLICKS_ON_GIFS } from '@/lib/store'
+	import { foundGifs, matchedGifs, MAX_CLICKS_ON_GIFS } from '@/lib/stores/game'
 
 	export let gif = { url: '', discovered: false }
 	export let index = 0

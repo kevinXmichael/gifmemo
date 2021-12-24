@@ -5,7 +5,8 @@
 <header class="bg-primary">
 	<nav class="text-secondary">
 		<a href="/">Home</a>
-		<a href="test">test</a>
+		<a href="/server">Create Game</a>
+		<a href="/client">Join Game</a>
 	</nav>
 </header>
 

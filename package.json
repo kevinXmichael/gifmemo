@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "svelte-kit dev --host --port 8080 && concurrently --kill-others npm:dev:*",
 		"build": "svelte-kit build",
-		"serve": "yarn build && node src/server.js -p 8080",
+		"serve": "yarn build && nodemon src/server localhost 8080",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
@@ -21,6 +21,7 @@
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.2.1",
+		"nodemon": "^2.0.15",
 		"postcss": "^8.3.9",
 		"postcss-load-config": "^3.1.0",
 		"prettier": "^2.4.1",
