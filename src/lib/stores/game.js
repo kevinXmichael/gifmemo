@@ -4,6 +4,12 @@ import { fetchGifs } from '@/lib/stores/gifs'
 const TIMEOUT_IF_NO_MATCH = 2000
 export const MAX_CLICKS_ON_GIFS = 2
 
+export const gameInfoLocal = writable({
+	isClient: false,
+	isHost: false,
+	isGuest: false,
+	gameInitialized: false
+})
 export const gameState = writable({})
 export const foundGifs = writable([])
 export const matchedGifs = writable([])
@@ -32,6 +38,14 @@ export async function initGame() {
 
 export function updateGame(newGameState) {
 	gameState.set(newGameState)
+	return true
+}
+
+export function updateGameInfoLocal(key, value) {
+	gameInfoLocal.update(gameInfoLocal_ => {
+		gameInfoLocal_[key] = value
+		return gameInfoLocal_
+	})
 	return true
 }
 

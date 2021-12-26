@@ -2,8 +2,8 @@
 	import '@/styles/app.scss'
 	import { loadTranslations } from '@/i18n'
 	import boot from '@/lib/boot'
-	import Footer from '@/lib/Footer.svelte'
-	import Header from '@/lib/Header.svelte'
+	import Footer from '@/lib/layout/Footer.svelte'
+	import Header from '@/lib/layout/Header.svelte'
 	let setupResult = false
 
 	export const load = async ({ page }) => {

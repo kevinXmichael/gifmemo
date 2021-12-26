@@ -24,3 +24,10 @@
 .std-border {
 	@apply border-2;
 }
+
+.spacer {
+	// @apply flex grow;
+	display: flex !important;
+	flex: 1 !important;
+	flex-grow: 1 !important;
+}

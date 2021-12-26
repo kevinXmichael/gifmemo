@@ -1,4 +1,4 @@
-import i18n from 'sveltekit-i18n'
+import i18n from 'sveltekit-i18n' // https://github.com/jarda-svoboda/sveltekit-i18n
 
 export const config = ({
   loaders: [
