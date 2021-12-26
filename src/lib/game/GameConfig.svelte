@@ -7,6 +7,7 @@
 	import {
 		gameState,
 		gameInfoLocal,
+		resetGame,
 		initGame,
 		updateGame,
 		updateGameInfoLocal
@@ -29,7 +30,7 @@
 	})
 
 	socket.on('game-join-accepted-client', (gameState) => {
-		updateGameInfoLocal('gameInitialized', updateGame(newGameState))
+		updateGameInfoLocal('gameInitialized', updateGame(gameState))
 		networkStatus = NETWORK_STATUS.LOADED
 	})
 
@@ -60,8 +61,7 @@
 
 	for (const event in ['disconnected', 'host-disconnected', 'game-canceled']) {
 		socket.on(event, (hostID) => {
-			// TODO: reset gameState
-			// initGame() maybe?
+			resetGame()
 		})
 	}
 
@@ -89,7 +89,6 @@
 </script>
 
 {#if connected}
-	<!-- TODO: also show possible to connect, fetch that data from router -->
 	{#if networkStatus !== NETWORK_STATUS.LOADED}
 		<div class="flex flex-row w-full h-full items-center justify-center">
 			{#if $gameInfoLocal.isHost}

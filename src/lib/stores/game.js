@@ -1,15 +1,16 @@
 import { writable } from 'svelte/store'
 import { fetchGifs } from '@/lib/stores/gifs'
 
-const TIMEOUT_IF_NO_MATCH = 2000
 export const MAX_CLICKS_ON_GIFS = 2
-
-export const gameInfoLocal = writable({
+const TIMEOUT_IF_NO_MATCH = 2000
+const defaultGameInfoLocal = {
 	isClient: false,
 	isHost: false,
 	isGuest: false,
 	gameInitialized: false
-})
+}
+
+export const gameInfoLocal = writable(defaultGameInfoLocal)
 export const gameState = writable({})
 export const foundGifs = writable([])
 export const matchedGifs = writable([])
@@ -22,11 +23,13 @@ export async function initGame() {
 	gameState.set({
 		host: {
 			active: true,
+			username: false,
 			id: false,
 			score: 0
 		},
 		client: {
 			active: false,
+			username: false,
 			id: false,
 			score: 0
 		},
@@ -36,9 +39,20 @@ export async function initGame() {
 	return true
 }
 
+export function resetGame() {
+	// TODO: maybe store highscore data?
+	gameInfoLocal.set(defaultGameInfoLocal)
+	gameState.set({})
+	resetFoundGifs()
+	resetMatchedGifs()
+}
+
 export function updateGame(newGameState) {
-	gameState.set(newGameState)
-	return true
+	if (newGameState) {
+		gameState.set(newGameState)
+		return true
+	}
+	return false
 }
 
 export function updateGameInfoLocal(key, value) {

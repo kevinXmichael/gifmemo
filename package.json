@@ -4,9 +4,11 @@
 	"author": "metab UG (haftungsbeschränkt) <ninjas@metab.rocks>",
 	"license": "UNLICENSED",
 	"scripts": {
-		"dev": "svelte-kit dev --host --port 8080 && concurrently --kill-others npm:dev:*",
 		"build": "svelte-kit build",
-		"serve": "yarn build && nodemon src/server localhost",
+		"cleanNode": "sudo pkill node",
+		"dev": "concurrently --kill-others \"yarn server\" \"svelte-kit dev --host --port 8080\"",
+		"serve": "yarn build && yarn server",
+		"server": "nodemon src/server localhost",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",

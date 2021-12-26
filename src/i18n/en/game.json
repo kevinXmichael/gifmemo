@@ -1,8 +1,8 @@
 {
-	"create": "Create",
+	"create": "New Game",
 	"join": {
-		"caption": "Join",
-		"placeholder": "Host ID goes here"
+		"caption": "Join Game",
+		"placeholder": "Put host ID here"
 	},
 	"info": {
 		"shareID": "Share this id: {{hostID}}"
