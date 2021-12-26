@@ -1,29 +1,26 @@
-<script>
+<script context="module">
 	import '@/styles/app.scss'
+	import { loadTranslations } from '@/i18n'
 	import boot from '@/lib/boot'
-
-	import { register, init, _ } from 'svelte-i18n' // https://github.com/kaisermann/svelte-i18n
 	import Footer from '@/lib/Footer.svelte'
 	import Header from '@/lib/Header.svelte'
+	let setupResult = false
 
-	async function setup() {
-		register('en', () => import('@/i18n/en.json'))
-
-		return await Promise.allSettled([init({ initialLocale: 'en', fallbackLocale: 'en' })])
+	export const load = async ({ page }) => {
+		const { path } = page
+		const locale = 'en' // get from cookie or user session...
+		setupResult = await Promise.allSettled([boot(), loadTranslations(locale, path)])
+		return {}
 	}
-
-	const setupResult = setup()
-	const bootfile = boot()
 </script>
 
-{#await bootfile then resultBoot}
+{#if setupResult}
 	<Header />
-
-	{#await setupResult then result}
-		<main class="m-auto" style="padding-bottom: var(--footer-height);">
-			<slot />
-		</main>
-	{/await}
-
+	<main
+		class="m-auto"
+		style="padding-top: var(--header-height); padding-bottom: var(--footer-height);"
+	>
+		<slot />
+	</main>
 	<Footer />
-{/await}
+{/if}

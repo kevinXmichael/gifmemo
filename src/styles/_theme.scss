@@ -1,16 +1,26 @@
 .theme {
+	--error: #F571B5;
 	--success: #1cb51c;
 	--yellow: #ffff00;
+	--black: #000000;
 
 	&--dark {
 		@extend .theme;
-		--primary: #000000;
+		--primary: #0F172A;
+		--primary-variant: #1E293B;
 		--secondary: #ffffff;
+		--secondary-variant: #ffffff;
 	}
 
 	&--light {
 		@extend .theme;
 		--primary: #ffffff;
-		--secondary: #000000;
+		--primary-variant: #1E293B;
+		--secondary: #0F172A;
+		--secondary-variant: #0F172A;
 	}
+}
+
+.std-border {
+	@apply border-2;
 }

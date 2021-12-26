@@ -25,12 +25,12 @@
 	}
 }
 
-.flip-horizontally {
-	transform: rotateY(180deg);
-	transition: $std-transition-duration;
+// .flip-horizontally {
+// 	transform: rotateY(180deg);
+// 	transition: $std-transition-duration;
 
-	&--back {
-		// transform: rotateY(360deg);
-		transition: $std-transition-duration;
-	}
-}
+// 	&--back {
+// 		// transform: rotateY(180deg);
+// 		transition: $std-transition-duration;
+// 	}
+// }

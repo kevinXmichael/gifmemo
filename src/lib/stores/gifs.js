@@ -21,7 +21,7 @@ export async function fetchGifs(players = DEFAULT_PLAYERS_COUNT) {
 		result?.data?.results?.map((gif) => {
 			return {
 				url: gif.media[0]?.mp4?.url,
-				discovered: false
+				discoveredBy: false
 			}
 		}) ?? []
 

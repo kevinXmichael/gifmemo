@@ -1,0 +1,10 @@
+{
+	"create": "Create",
+	"join": {
+		"caption": "Join",
+		"placeholder": "Host ID goes here"
+	},
+	"info": {
+		"shareID": "Share this id: {{hostID}}"
+	}
+}

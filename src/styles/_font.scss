@@ -19,6 +19,10 @@ body {
 	font-weight: $fw-regular;
 }
 
+h1, h2, p, a, b, div, span {
+	color: var(--secondary);
+}
+
 .text-no-select {
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */

@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "svelte-kit dev --host --port 8080 && concurrently --kill-others npm:dev:*",
 		"build": "svelte-kit build",
-		"serve": "yarn build && nodemon src/server localhost 8080",
+		"serve": "yarn build && nodemon src/server localhost",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
@@ -23,6 +23,7 @@
 		"eslint-plugin-svelte3": "^3.2.1",
 		"nodemon": "^2.0.15",
 		"postcss": "^8.3.9",
+		"postcss-import": "^14.0.2",
 		"postcss-load-config": "^3.1.0",
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
@@ -39,6 +40,6 @@
 		"polka": "^0.5.2",
 		"socket.io": "^4.4.0",
 		"socket.io-client": "^4.4.0",
-		"svelte-i18n": "^3.3.13"
+		"sveltekit-i18n": "^1.2.0"
 	}
 }

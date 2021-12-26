@@ -1,0 +1,9 @@
+{
+	"page_title": "GifMemo",
+	"connection": {
+		"pending": "You are not connected yet, please wait..."
+	},
+	"header": {
+		"copy": "Copy"
+	}
+}

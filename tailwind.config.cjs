@@ -28,7 +28,9 @@ const config = {
 			primary: 'var(--primary)',
 			secondary: 'var(--secondary)',
 			success: 'var(--success)',
-			yellow: 'var(--yellow)'
+			yellow: 'var(--yellow)',
+			error: 'var(--error)',
+			black: 'var(--black)'
 		}
 	}
 }

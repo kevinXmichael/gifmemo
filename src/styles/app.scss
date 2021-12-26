@@ -6,7 +6,8 @@
 
 :root {
 	--app-max-width: 100rem;
-	--footer-height: 4rem;
+	--header-height: 3rem;
+	--footer-height: 3rem;
 }
 
 html,
@@ -20,6 +21,8 @@ main {
 }
 
 @import 'animations';
+@import 'buttons';
+@import 'input';
 @import 'font';
 @import 'scroll';
 @import 'theme';

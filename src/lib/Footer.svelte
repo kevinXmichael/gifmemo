@@ -4,9 +4,9 @@
 
 <footer>
 	<nav
-		class="flex flex-row flex-nowrap h-full w-full justify-center items-center text-center text-secondary bg-primary"
+		class="flex flex-row flex-nowrap h-full w-full justify-center items-center text-center bg-primary"
 	>
-		<h1>{copyright}</h1>
+		<h2>{copyright}</h2>
 	</nav>
 </footer>
 
@@ -18,5 +18,6 @@
 		bottom: 0;
 		height: var(--footer-height);
 		min-height: var(--footer-height);
+		z-index: 5;
 	}
 </style>

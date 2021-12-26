@@ -1,0 +1,17 @@
+button {
+    @extend .std-border;
+    @apply border-secondary p-sm;
+    transition: $std-transition-duration;
+
+    color: var(--secondary);
+    background-color: var(--primary);
+
+    width: $button-min-width;
+    min-width: $button-min-width;
+
+    &:hover {
+        @apply pressable std-hover--scale;
+        color: var(--primary);
+        background-color: var(--secondary);
+    }
+}

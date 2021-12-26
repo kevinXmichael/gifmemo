@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte'
 	import { foundGifs, matchedGifs, MAX_CLICKS_ON_GIFS } from '@/lib/stores/game'
 
-	export let gif = { url: '', discovered: false }
+	export let gif = { url: '', discoveredBy: false }
 	export let index = 0
 
 	let borderColor = 'border-secondary'
@@ -10,13 +10,13 @@
 	const videoWrapperSize = 250
 	const videoStyle = `width: ${videoWrapperSize}px; max-width: ${videoWrapperSize}px; height: ${videoWrapperSize}px; max-height: ${videoWrapperSize}px;`
 
-	$: videoClass = `border-2 rounded-md pressable std-hover--scale ${borderColor}`
+	$: videoClass = `std-border std-hover--scale pressable ${borderColor}`
 	$: {
 		checkStyle()
 	}
 
 	function checkStyle() {
-		if (gif.discovered) {
+		if (gif.discoveredBy) {
 			borderColor = 'border-success'
 		} else if (clicked) {
 			borderColor = 'border-yellow'
@@ -41,7 +41,8 @@
 
 	const unsubscribeMatchedGifs = matchedGifs.subscribe((gifs) => {
 		if (gifs.includes(gif.url)) {
-			gif.discovered = true
+			// TODO: set the ID that discovered it
+			gif.discoveredBy = true
 			checkStyle()
 		}
 	})
@@ -53,11 +54,8 @@
 </script>
 
 <div class="p-sm">
-	<div
-		class="{clicked ? 'flip-horizontally' : 'flip-horizontally--back'} text-no-select"
-		style={videoStyle}
-	>
-		{#if gif.discovered || clicked}
+	<div class="text-no-select" style={videoStyle}>
+		{#if gif.discoveredBy || clicked}
 			<video src={gif.url} autoplay muted loop style={videoStyle} class={videoClass} />
 		{:else}
 			<div style="position: relative;">
