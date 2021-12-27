@@ -10,6 +10,7 @@ const defaultGameInfoLocal = {
 	gameInitialized: false
 }
 
+export const gameNetworkStatus = writable(false)
 export const gameInfoLocal = writable(defaultGameInfoLocal)
 export const gameState = writable({})
 export const foundGifs = writable([])
@@ -23,13 +24,13 @@ export async function initGame() {
 	gameState.set({
 		host: {
 			active: true,
-			username: false,
+			username: 'Player 1',
 			id: false,
 			score: 0
 		},
 		client: {
 			active: false,
-			username: false,
+			username: 'Player 2',
 			id: false,
 			score: 0
 		},

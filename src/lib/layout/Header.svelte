@@ -1,16 +1,18 @@
 <script>
 	import { t } from '@/i18n'
-	import { gameState } from '@/lib/stores/game'
-	import GameConfig from '@/lib/game/GameConfig.svelte'
+	import GameInfo from '@/lib/game/GameInfo.svelte'
+	import { gameInfoLocal } from '@/lib/stores/game'
 </script>
 
-<header>
-	<nav
-		class="flex flex-row flex-nowrap h-full w-full justify-evenly items-center text-center bg-primary"
-	>
-		<GameConfig />
-	</nav>
-</header>
+{#if $gameInfoLocal.gameInitialized}
+	<header>
+		<nav
+			class="flex flex-row flex-nowrap h-full w-full justify-evenly items-center text-center bg-primary"
+		>
+			<GameInfo />
+		</nav>
+	</header>
+{/if}
 
 <svelte:head>
 	<title>{$t('general.page_title')}</title>

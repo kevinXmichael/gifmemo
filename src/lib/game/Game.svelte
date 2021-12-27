@@ -1,6 +1,7 @@
 <script>
 	import { t } from '@/i18n'
 	import { gameState, gameInfoLocal } from '@/lib/stores/game'
+	import GameLogin from '@/lib/game/GameLogin.svelte'
 	import GifMemoVideo from '@/lib/GifMemoVideo.svelte'
 </script>
 
@@ -11,5 +12,5 @@
 		{/each}
 	</div>
 {:else}
-	<h2>{$t('general.connection.pending')}</h2>
+	<GameLogin />
 {/if}
