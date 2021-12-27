@@ -1,5 +1,8 @@
 {
-	"create": "New Game",
+	"create": {
+		"caption": "New Game",
+		"placeholder": "some fancy"
+	},
 	"join": {
 		"caption": "Join Game",
 		"placeholder": "Put host ID here"

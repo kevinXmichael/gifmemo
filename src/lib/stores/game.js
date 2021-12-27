@@ -1,6 +1,9 @@
 import { writable } from 'svelte/store'
 import { fetchGifs } from '@/lib/stores/gifs'
 
+import { io } from 'socket.io-client'
+export const socket = io('ws://localhost:3030', { autoConnect: false })
+
 export const MAX_CLICKS_ON_GIFS = 2
 const TIMEOUT_IF_NO_MATCH = 2000
 const defaultGameInfoLocal = {
@@ -19,12 +22,12 @@ export const matchedGifs = writable([])
 export const resetFoundGifs = () => foundGifs.set([])
 export const resetMatchedGifs = () => matchedGifs.set([])
 
-export async function initGame() {
+export async function initGame(username = 'Player 1') {
 	const gifs = await fetchGifs()
 	gameState.set({
 		host: {
 			active: true,
-			username: 'Player 1',
+			username,
 			id: false,
 			score: 0
 		},

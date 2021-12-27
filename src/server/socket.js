@@ -12,11 +12,11 @@ export default class SocketServer {
             })
 
             socket.on('game-join', (data) => {
-                io.to(data.hostID).emit('game-join-asked', data.clientID)
+                io.to(data.hostID).emit('game-join-asked', data)
             })
 
-            socket.on('game-join-rejected-server', (clientID) => {
-                io.to(clientID).emit('game-join-rejected-client')
+            socket.on('game-join-rejected-server', (data) => {
+                io.to(data.clientID).emit('game-join-rejected-client')
             })
 
             socket.on('game-join-accepted-server', (gameState) => {
