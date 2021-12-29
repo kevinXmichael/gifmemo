@@ -1,6 +1,6 @@
 <script>
 	import { onDestroy } from 'svelte'
-	import { foundGifs, matchedGifs, MAX_CLICKS_ON_GIFS } from '@/lib/stores/game'
+	import { gameState, gameInfoLocal, MAX_CLICKS_ON_GIFS } from '@/lib/stores/game'
 
 	export let gif = { url: '', discoveredBy: false }
 	export let index = 0
@@ -26,30 +26,45 @@
 	}
 
 	function handleClick() {
-		if ($foundGifs.length < MAX_CLICKS_ON_GIFS) {
+		const allowClick =
+			($gameInfoLocal.isClient && $gameState.client.active) ||
+			($gameInfoLocal.isHost && $gameState.host.active)
+
+		if (allowClick && $gameState.gifs.found.length < MAX_CLICKS_ON_GIFS) {
 			clicked = true
-			foundGifs.update((val) => [...val, gif.url])
+			gameState.update((gameState) => {
+				gameState.gifs.found.push(gif.url)
+				return gameState
+			})
 		}
 	}
 
-	const unsubscribeFoundGifs = foundGifs.subscribe((gifs) => {
-		if (gifs.isEmpty()) {
+	function getDiscoveredBy(gameState) {
+		return gameState.host.active ? gameState.host.username : gameState.client.username
+	}
+
+	function checkHighscore() {
+		if (gif.discoveredBy === gameState.host.username) {
+			gameState.host.score++
+		} else {
+			gameState.client.score++
+		}
+	}
+
+	const unsubscribeGameState = gameState.subscribe((gameState) => {
+		if (gameState.gifs.found.isEmpty()) {
 			clicked = false
 		}
+		if (gameState.gifs.matched.includes(gif.url)) {
+			gif.discoveredBy = getDiscoveredBy(gameState)
+			checkHighscore()
+		}
+
 		checkStyle()
 	})
 
-	const unsubscribeMatchedGifs = matchedGifs.subscribe((gifs) => {
-		if (gifs.includes(gif.url)) {
-			// TODO: set the ID that discovered it
-			gif.discoveredBy = true
-			checkStyle()
-		}
-	})
-
 	onDestroy(() => {
-		unsubscribeFoundGifs()
-		unsubscribeMatchedGifs()
+		unsubscribeGameState()
 	})
 </script>
 

@@ -26,7 +26,9 @@ const config = {
 		},
 		colors: {
 			primary: 'var(--primary)',
+			'primary-variant': 'var(--primary-variant)',
 			secondary: 'var(--secondary)',
+			'secondary-variant': 'var(--secondary-variant)',
 			success: 'var(--success)',
 			yellow: 'var(--yellow)',
 			error: 'var(--error)',

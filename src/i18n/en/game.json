@@ -1,13 +1,18 @@
 {
 	"create": {
 		"caption": "New Game",
-		"placeholder": "some fancy"
+		"heading": "Username",
+		"placeholder": "Enter a fancy username"
 	},
 	"join": {
 		"caption": "Join Game",
-		"placeholder": "Put host ID here"
+		"heading": "Host ID",
+		"placeholder": "Put the Host ID here"
 	},
 	"info": {
-		"shareID": "Share this id: {{hostID}}"
+		"notReady": "Player 2",
+		"waitingForOtherPlayer": "Waiting for Player 2...",
+		"copiedHostID": "Copied!",
+		"copyHostID": "Click to copy your hosting id:"
 	}
 }

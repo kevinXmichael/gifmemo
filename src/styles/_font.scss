@@ -7,9 +7,6 @@
 	line-height: 1.15rem;
 }
 
-$fw-regular: 400;
-$fw-bold: 700;
-
 *,
 html,
 body {
@@ -19,7 +16,7 @@ body {
 	font-weight: $fw-regular;
 }
 
-h1, h2, p, a, b, div, span {
+h1, h2, p, a, b, div, span, input {
 	color: var(--secondary);
 }
 
@@ -30,4 +27,11 @@ h1, h2, p, a, b, div, span {
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* Internet Explorer/Edge */
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.text-cut {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden; 
+	width: 5rem; 
 }

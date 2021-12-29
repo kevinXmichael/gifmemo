@@ -20,9 +20,14 @@ main {
 	max-width: var(--app-max-width) !important;
 }
 
+.std-height {
+	height: $std-component-height;
+	max-height: $std-component-height;
+}
+
+@import 'font';
 @import 'animations';
 @import 'buttons';
 @import 'input';
-@import 'font';
 @import 'scroll';
 @import 'theme';

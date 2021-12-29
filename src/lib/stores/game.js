@@ -5,7 +5,7 @@ import { io } from 'socket.io-client'
 export const socket = io('ws://localhost:3030', { autoConnect: false })
 
 export const MAX_CLICKS_ON_GIFS = 2
-const TIMEOUT_IF_NO_MATCH = 2000
+export const STD_TIME_OUT = 2000
 const defaultGameInfoLocal = {
 	isClient: false,
 	isHost: false,
@@ -16,39 +16,49 @@ const defaultGameInfoLocal = {
 export const gameNetworkStatus = writable(false)
 export const gameInfoLocal = writable(defaultGameInfoLocal)
 export const gameState = writable({})
-export const foundGifs = writable([])
-export const matchedGifs = writable([])
 
-export const resetFoundGifs = () => foundGifs.set([])
-export const resetMatchedGifs = () => matchedGifs.set([])
+export const resetFoundGifs = () => gameState.update(gameState => {
+	gameState.gifs.found = []
+	return gameState
+})
 
-export async function initGame(username = 'Player 1') {
-	const gifs = await fetchGifs()
+export const resetMatchedGifs = () => gameState.update(gameState => {
+	gameState.gifs.matched = []
+	return gameState
+})
+
+export async function initGame(username1 = false, username2 = false, guestIDs = new Set()) {
+	const allGifs = await fetchGifs()
 	gameState.set({
 		host: {
 			active: true,
-			username,
+			username: username1,
 			id: false,
 			score: 0
 		},
 		client: {
 			active: false,
-			username: 'Player 2',
+			username: username2,
 			id: false,
 			score: 0
 		},
-		guestIDs: new Set(),
-		gifs
+		guestIDs,
+		gifs: {
+			all: allGifs,
+			found: [],
+			matched: []
+		}
 	})
 	return true
 }
 
-export function resetGame() {
-	// TODO: maybe store highscore data?
-	gameInfoLocal.set(defaultGameInfoLocal)
-	gameState.set({})
-	resetFoundGifs()
-	resetMatchedGifs()
+/** Restarts the game and keeps usernames */
+export function restartGame() {
+	return initGame(gameState.host.username, gameState.client.username, gameState.guestIDs)
+}
+
+export function endGame() {
+	// TODO: end game here? gameInitialized.gameInitialized = false ?
 }
 
 export function updateGame(newGameState) {
@@ -71,13 +81,24 @@ export function gifsMatch(gifs) {
 	return gifs.length === MAX_CLICKS_ON_GIFS && gifs.allEqual()
 }
 
-foundGifs.subscribe((gifs) => {
-	if (gifs.length >= MAX_CLICKS_ON_GIFS) {
-		if (gifsMatch(gifs)) {
-			matchedGifs.update(val => [...val, gifs[0]])
-			resetFoundGifs()
+gameState.subscribe((gameStateNew) => {
+	const gifsFound = gameStateNew.gifs?.found ?? []
+	if (gifsFound.length >= MAX_CLICKS_ON_GIFS) {
+		if (gifsMatch(gifsFound)) {
+			gameState.update(gameState => {
+				gameState.gifs.matched.push(gifsFound)
+				gameState.gifs.found = []
+				return gameState
+			})
 		} else {
-			setTimeout(resetFoundGifs, TIMEOUT_IF_NO_MATCH)
+			setTimeout(() => {
+				gameState.update(gameState => {
+					gameState.gifs.found = []
+					gameState.host.active = !gameState.host.active
+					gameState.client.active = !gameState.client.active
+					return gameState
+				})
+			}, STD_TIME_OUT)
 		}
 	}
 })

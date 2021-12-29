@@ -1,12 +1,12 @@
 button {
     @extend .std-border;
-    @apply border-secondary p-sm;
+    @apply border-secondary p-sm std-height;
     transition: $std-transition-duration;
 
     color: var(--secondary);
     background-color: var(--primary);
 
-    width: $button-min-width;
+    width: 100%;
     min-width: $button-min-width;
 
     &:hover {

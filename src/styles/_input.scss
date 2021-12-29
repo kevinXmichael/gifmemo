@@ -1,0 +1,30 @@
+input {
+    @include std-font-props;
+    @extend .std-border;
+    
+    @apply border-secondary bg-primary-variant p-sm std-height;
+
+    transition: $std-transition-duration;
+
+    @media (hover) {
+        &:hover {
+            outline: none !important;
+        }
+    }  
+
+    &:focus, &:active {
+        outline: none !important;
+    }
+
+    &::placeholder {
+        color: var(--secondary-variant) !important;
+        // font-size: 1rem !important; // 16px;
+    }
+        
+    &:disabled {
+        //     @extend .disabled-element;
+        color: var(--secondary-variant) !important;
+        background-color: var(--primary-variant) !important;
+        // font-size: 1rem !important; // 16px;
+    }
+}

@@ -9,15 +9,15 @@
 		--primary: #0F172A;
 		--primary-variant: #1E293B;
 		--secondary: #ffffff;
-		--secondary-variant: #ffffff;
+		--secondary-variant: #ffffff66;
 	}
 
 	&--light {
 		@extend .theme;
 		--primary: #ffffff;
-		--primary-variant: #1E293B;
+		--primary-variant: #ffffff66;
 		--secondary: #0F172A;
-		--secondary-variant: #0F172A;
+		--secondary-variant: #1E293B;
 	}
 }
 
