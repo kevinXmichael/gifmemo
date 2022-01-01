@@ -17,13 +17,15 @@ export async function fetchGifs(players = DEFAULT_PLAYERS_COUNT) {
 	)}&key=${TENOR_API_KEY}`
 
 	const result = await axios.get(gifsFetchingUrl)
-	const resultGifs =
-		result?.data?.results?.map((gif) => {
-			return {
-				url: gif.media[0]?.mp4?.url,
-				discoveredBy: false
-			}
-		}) ?? []
+	const resultGifs = []
+	result?.data?.results?.forEach((gif) => {
+		const gif_ = {
+			clicked: false,
+			foundBy: false,
+			url: gif.media[0]?.mp4?.url
+		}
+		resultGifs.push(gif_, {...gif_}) 
+	}) ?? []
 
-	return [...resultGifs, ...resultGifs].shuffle()
+	return resultGifs.shuffle().shuffle()
 }

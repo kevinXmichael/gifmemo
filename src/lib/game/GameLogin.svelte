@@ -1,4 +1,5 @@
 <script>
+	import { mode } from '$app/env'
 	import { t } from '@/i18n'
 	import { page } from '$app/stores'
 	import { onMount } from 'svelte'
@@ -12,7 +13,7 @@
 	import { NETWORK_STATUS } from '@/lib/network'
 
 	let localHostID = ''
-	let username
+	let username = mode === 'development' ? new Date().getTime().toString() : ''
 
 	function hasUsername() {
 		return !(username?.isOnlyWhitespace?.() ?? true)

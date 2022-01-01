@@ -9,6 +9,7 @@
 		updateGameInfoLocal
 	} from '@/lib/stores/game'
 	import { t } from '@/i18n'
+	import { NETWORK_STATUS } from '@/lib/network'
 	import GameLogin from '@/lib/game/GameLogin.svelte'
 	import GifMemoVideo from '@/lib/GifMemoVideo.svelte'
 
@@ -21,6 +22,11 @@
 	socket.on('game-join-rejected-client', () => {
 		alert('This game is already full')
 		gameNetworkStatus.set(NETWORK_STATUS.FAILED)
+	})
+
+	socket.on('game-new-state-client', (gameState_) => {
+		console.log('game-new-state-client!!!', $gameInfoLocal.isHost)
+		gameState.set(gameState_)
 	})
 
 	socket.on('game-join-accepted-client', (gameState) => {
@@ -51,6 +57,7 @@
 		} else {
 			const newGameState = { ...$gameState }
 			newGameState.client.id = data.clientID
+			// "Avoid" duplicate username the lazy way
 			newGameState.client.username =
 				data.username.toLowerCase() === newGameState.host.username.toLowerCase()
 					? data.username + '#2'
@@ -58,10 +65,6 @@
 			updateGameInfoLocal('gameInitialized', updateGame(newGameState))
 			socket.emit('game-join-accepted-server', $gameState)
 		}
-	})
-
-	socket.on('game-state-updated', (newGameState) => {
-		updateGameInfoLocal('gameInitialized', updateGame(newGameState))
 	})
 
 	for (const event in ['disconnected', 'host-disconnected', 'game-canceled']) {
@@ -78,7 +81,7 @@
 			<div class="flex flex-row flex-wrap items-center justify-center mb-md">
 				{#if $gameState.client.username}
 					{#each $gameState.gifs?.all as gif, index}
-						<GifMemoVideo {gif} index={index + 1} />
+						<GifMemoVideo {gif} {index} />
 					{/each}
 				{:else}
 					<h1>{$t('game.info.waitingForOtherPlayer')}</h1>

@@ -10,6 +10,10 @@ export default class SocketServer {
                 socket.join(hostID)
                 io.to(hostID).emit('game-new-session-created', hostID)
             })
+            
+            socket.on('game-new-state-server', (gameState) => {
+                io.to(gameState.host.id).emit('game-new-state-client', gameState)
+            })
 
             socket.on('game-join', (data) => {
                 io.to(data.hostID).emit('game-join-asked', data)

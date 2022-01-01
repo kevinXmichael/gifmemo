@@ -17,16 +17,6 @@ export const gameNetworkStatus = writable(false)
 export const gameInfoLocal = writable(defaultGameInfoLocal)
 export const gameState = writable({})
 
-export const resetFoundGifs = () => gameState.update(gameState => {
-	gameState.gifs.found = []
-	return gameState
-})
-
-export const resetMatchedGifs = () => gameState.update(gameState => {
-	gameState.gifs.matched = []
-	return gameState
-})
-
 export async function initGame(username1 = false, username2 = false, guestIDs = new Set()) {
 	const allGifs = await fetchGifs()
 	gameState.set({
@@ -45,8 +35,7 @@ export async function initGame(username1 = false, username2 = false, guestIDs = 
 		guestIDs,
 		gifs: {
 			all: allGifs,
-			found: [],
-			matched: []
+			found: []
 		}
 	})
 	return true
@@ -54,7 +43,7 @@ export async function initGame(username1 = false, username2 = false, guestIDs = 
 
 /** Restarts the game and keeps usernames */
 export function restartGame() {
-	return initGame(gameState.host.username, gameState.client.username, gameState.guestIDs)
+	return initGame($gameState.host.username, $gameState.client.username, $gameState.guestIDs)
 }
 
 export function endGame() {
@@ -76,29 +65,3 @@ export function updateGameInfoLocal(key, value) {
 	})
 	return true
 }
-
-export function gifsMatch(gifs) {
-	return gifs.length === MAX_CLICKS_ON_GIFS && gifs.allEqual()
-}
-
-gameState.subscribe((gameStateNew) => {
-	const gifsFound = gameStateNew.gifs?.found ?? []
-	if (gifsFound.length >= MAX_CLICKS_ON_GIFS) {
-		if (gifsMatch(gifsFound)) {
-			gameState.update(gameState => {
-				gameState.gifs.matched.push(gifsFound)
-				gameState.gifs.found = []
-				return gameState
-			})
-		} else {
-			setTimeout(() => {
-				gameState.update(gameState => {
-					gameState.gifs.found = []
-					gameState.host.active = !gameState.host.active
-					gameState.client.active = !gameState.client.active
-					return gameState
-				})
-			}, STD_TIME_OUT)
-		}
-	}
-})
