@@ -26,6 +26,6 @@ export async function fetchGifs(players = DEFAULT_PLAYERS_COUNT) {
 		}
 		resultGifs.push(gif_, {...gif_}) 
 	}) ?? []
-
+	// Yeah, we really shuffle twice here
 	return resultGifs.shuffle().shuffle()
 }

@@ -47,7 +47,7 @@ export function restartGame() {
 }
 
 export function endGame() {
-	// TODO: end game here? gameInitialized.gameInitialized = false ?
+	gameInfoLocal.set(defaultGameInfoLocal)
 }
 
 export function updateGame(newGameState) {

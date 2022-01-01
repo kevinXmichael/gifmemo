@@ -24,11 +24,16 @@ export default class SocketServer {
             })
 
             socket.on('game-join-accepted-server', (gameState) => {
-                socket.join(gameState.host.id)
-                io.to(gameState.client.id).emit('game-join-accepted-client', gameState)
+                io.to(gameState.client.id).emit('game-room-invite', gameState)
             })
+            
+            socket.on('game-room-join', (gameState => {
+                socket.join(gameState.host.id)
+                io.to(gameState.host.id).emit('game-join-accepted-client', gameState)
+            }))
 
             socket.on("disconnect", () => {
+                console.log('server disconneted', socket.id)
                 io.to(socket.id).emit('disconnected')
             })
         })

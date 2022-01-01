@@ -25,11 +25,16 @@
 	})
 
 	socket.on('game-new-state-client', (gameState_) => {
-		console.log('game-new-state-client!!!', $gameInfoLocal.isHost)
+		console.log('game-new-state-client => isHost?', $gameInfoLocal.isHost)
 		gameState.set(gameState_)
 	})
 
+	socket.on('game-room-invite', (gameState) => {
+		socket.emit('game-room-join', gameState)
+	})
+
 	socket.on('game-join-accepted-client', (gameState) => {
+		console.log('game-join-accepted-client', gameState)
 		const gameInitialized = updateGame(gameState)
 		gameInfoLocal.update((gameInfoLocal_) => {
 			gameInfoLocal_.isClient = true
@@ -63,11 +68,13 @@
 					? data.username + '#2'
 					: data.username
 			updateGameInfoLocal('gameInitialized', updateGame(newGameState))
+
 			socket.emit('game-join-accepted-server', $gameState)
 		}
 	})
 
 	for (const event in ['disconnected', 'host-disconnected', 'game-canceled']) {
+		console.log('client disconneted')
 		socket.on(event, (hostID) => {
 			endGame()
 		})
