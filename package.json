@@ -5,7 +5,7 @@
 	"license": "UNLICENSED",
 	"scripts": {
 		"build": "svelte-kit build",
-		"cleanNode": "sudo pkill node",
+		"cleanNode": "killall node",
 		"dev": "concurrently --kill-others \"yarn server\" \"svelte-kit dev --host --port 8080\"",
 		"serve": "yarn build && yarn server",
 		"server": "nodemon src/server localhost",

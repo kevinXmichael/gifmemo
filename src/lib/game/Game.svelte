@@ -73,12 +73,9 @@
 		}
 	})
 
-	for (const event in ['disconnected', 'host-disconnected', 'game-canceled']) {
-		console.log('client disconneted')
-		socket.on(event, (hostID) => {
-			endGame()
-		})
-	}
+	socket.on('game-canceled', () => {
+		endGame()
+	})
 	socket.connect()
 </script>
 

@@ -19,3 +19,8 @@ Runs a local node server and works as in production, hot reload NOT enabled.
 ```bash
 $ yarn serve
 ```
+
+If you have problems that node is already running / port already in use:
+```bash
+$ yarn cleanNode
+```

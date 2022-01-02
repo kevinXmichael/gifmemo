@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { get, writable } from 'svelte/store'
 import { fetchGifs } from '@/lib/stores/gifs'
 
 import { io } from 'socket.io-client'
@@ -14,7 +14,7 @@ const defaultGameInfoLocal = {
 }
 
 export const gameNetworkStatus = writable(false)
-export const gameInfoLocal = writable(defaultGameInfoLocal)
+export const gameInfoLocal = writable({...defaultGameInfoLocal})
 export const gameState = writable({})
 
 export async function initGame(username1 = false, username2 = false, guestIDs = new Set()) {
@@ -43,11 +43,12 @@ export async function initGame(username1 = false, username2 = false, guestIDs = 
 
 /** Restarts the game and keeps usernames */
 export function restartGame() {
-	return initGame($gameState.host.username, $gameState.client.username, $gameState.guestIDs)
+	return initGame(get(gameState).host.username, get(gameState).client.username, get(gameState).guestIDs)
 }
 
 export function endGame() {
-	gameInfoLocal.set(defaultGameInfoLocal)
+	gameInfoLocal.set({...defaultGameInfoLocal})
+	// TODO: alert that host ended the game
 }
 
 export function updateGame(newGameState) {
