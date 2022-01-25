@@ -16,6 +16,8 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-node": "next",
+		"@sveltejs/adapter-vercel": "next",
 		"@sveltejs/kit": "next",
 		"autoprefixer": "^10.3.7",
 		"concurrently": "^6.5.0",
@@ -30,13 +32,12 @@
 		"prettier": "^2.4.1",
 		"prettier-plugin-svelte": "^2.4.0",
 		"sass": "^1.45.0",
-		"svelte": "^3.44.0",
-		"svelte-preprocess": "^4.9.8",
+		"svelte": "next",
+		"svelte-preprocess": "next",
 		"tailwindcss": "^3.0.0"
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-node": "^1.0.0-next.56",
 		"axios": "^0.24.0",
 		"express": "^4.17.2",
 		"polka": "^0.5.2",

@@ -1,5 +1,6 @@
 /** @type {import('@sveltejs/kit').Config} */
-import adapter from '@sveltejs/adapter-node'
+// import node from '@sveltejs/adapter-node'
+import vercel from '@sveltejs/adapter-vercel'
 import path from 'path'
 import preprocess from 'svelte-preprocess'
 
@@ -10,14 +11,15 @@ const config = {
 		})
 	],
 	kit: {
-		adapter: adapter({
-			out: 'dist',
+		adapter: vercel(),
+		// adapter: node({
+			// out: 'dist',
 			// precompress: false,
 			// env: {
 			// 	host: 'localhost',
 			// 	port: '8080'
 			// }
-		}),
+		// }),
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#gifmemo',
 		vite: {
