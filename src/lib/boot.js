@@ -45,7 +45,7 @@ function setInnerViewport() {
 }
 
 function doHTMLvoodoo() {
-	window.addEventListener('resize', setInnerViewport())
+	window.addEventListener('resize', setInnerViewport)
 
 	const hacker = '%cHey hacker 🔥'
 	console.info(hacker, 'color: red; font-size: medium')
